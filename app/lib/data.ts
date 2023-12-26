@@ -82,6 +82,34 @@ export async function fetchCardData() {
   }
 }
 
+export async function fetchPaidInvoicesCount() {
+  noStore()
+  const data = await sql`SELECT
+         SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid"
+         FROM invoices`;
+  return data.rows[0].paid
+}
+
+export async function fetchPendingInvoicesCount() {
+  noStore()
+  const data = await sql`SELECT
+         SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+         FROM invoices`;
+  return data.rows[0].pending
+}
+
+export async function fetchInvoicesCount() {
+  noStore()
+  const data = await sql`SELECT COUNT(*) FROM invoices`;
+  return Number(data.rows[0].count || 0)
+}
+
+export async function fetchCustomersCount() {
+  noStore()
+  const data = await sql`SELECT COUNT(*) FROM customers`;
+  return Number(data.rows[0].count || 0)
+}
+
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
