@@ -1,9 +1,8 @@
-import React from 'react';
 
-export default function page() {
+import CustomersTable from '@/app/ui/customers/table';
+
+export default  function page() {
     return (
-        <div>
-            Customers
-        </div>
+        <CustomersTable />
     );
 }
