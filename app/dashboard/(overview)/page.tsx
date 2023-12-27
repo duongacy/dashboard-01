@@ -1,4 +1,3 @@
-import { fetchLatestInvoices } from '@/app/lib/data';
 import { PaidInvoicesCard, PendingInvoicesCard, TotalCustomerCard, TotalInvoicesCard } from '@/app/ui/dashboard/cards';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
@@ -7,7 +6,6 @@ import { CardSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '@/ap
 import { Suspense } from 'react';
 
 export default async function page() {
-    const latestInvoices = await fetchLatestInvoices()
     return (
         <main>
             <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
