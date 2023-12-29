@@ -7,15 +7,18 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function InvoicesPagination({ totalPages }: { totalPages: number }) {
     const pathname = usePathname();
+
     const searchParams = useSearchParams();
-    const currentPage = Number(searchParams.get('page') || 1);
-    const allPages = generatePagination(currentPage, totalPages);
-    const generateURL = (page: number | string) => {
+    const currentPage = Number(searchParams.get('page') || 1)
+
+    const allPages = generatePagination(currentPage, totalPages)
+    const createURL = (page: string | number) => {
         const newSearchParams = new URLSearchParams();
         newSearchParams.set('page', page.toString());
         const newURL = `${pathname}?${newSearchParams.toString()}`
         return newURL;
     }
+
     if (totalPages < 1) {
         return null
     }
@@ -24,7 +27,7 @@ export default function InvoicesPagination({ totalPages }: { totalPages: number 
             <div className="inline-flex">
                 <PaginationArrow
                     direction="left"
-                    href={generateURL(currentPage - 1)}
+                    href={createURL(currentPage - 1)}
                     isDisabled={currentPage <= 1}
                 />
 
@@ -40,7 +43,7 @@ export default function InvoicesPagination({ totalPages }: { totalPages: number 
                         return (
                             <PaginationNumber
                                 key={page}
-                                href={generateURL(page)}
+                                href={createURL(page)}
                                 page={page}
                                 position={position}
                                 isActive={currentPage === page}
@@ -51,7 +54,7 @@ export default function InvoicesPagination({ totalPages }: { totalPages: number 
 
                 <PaginationArrow
                     direction="right"
-                    href={generateURL(currentPage + 1)}
+                    href={createURL(currentPage + 1)}
                     isDisabled={currentPage >= totalPages}
                 />
             </div>

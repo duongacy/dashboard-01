@@ -23,7 +23,7 @@ export default async function Page({ searchParams }: {
                 <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
             </div>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                <InvoicesSearch />
+                <InvoicesSearch className='flex-grow' />
                 <CreateInvoice />
             </div>
             <div className='flex-grow'>

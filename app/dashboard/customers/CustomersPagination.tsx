@@ -1,31 +1,33 @@
 'use client';
+import { generatePagination } from '@/app/lib/utils';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { generatePagination } from '@/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function InvoicesPagination({ totalPages }: { totalPages: number }) {
+export default function CustomersPagination({ totalPages }: { totalPages: number }) {
     const searchParams = useSearchParams();
-    const currentPage = Number(searchParams.get('page') || 1)
-    const pathname = usePathname()
-
+    const currentPage = Number(searchParams.get('page') || 1);
+    const pathname = usePathname();
     const allPages = generatePagination(currentPage, totalPages);
-    const createPageURL = (p: number | string) => {
-        const url = new URLSearchParams(searchParams);
-        url.set('page', p.toString());
-        return `${pathname}?${url.toString()}`;
-    }
 
+    const generateURL = (page: number | string) => {
+        const newSearchParams = new URLSearchParams();
+        newSearchParams.set('page', page.toString());
+        const newURL = `${pathname}?${newSearchParams.toString()}`
+        return newURL;
+    }
+    if (totalPages < 1) {
+        return null
+    }
     return (
         <>
             <div className="inline-flex">
                 <PaginationArrow
                     direction="left"
-                    href={createPageURL(currentPage - 1)}
+                    href={generateURL(currentPage - 1)}
                     isDisabled={currentPage <= 1}
                 />
-
                 <div className="flex -space-x-px">
                     {allPages.map((page, index) => {
                         let position: 'first' | 'last' | 'single' | 'middle' | undefined;
@@ -38,7 +40,7 @@ export default function InvoicesPagination({ totalPages }: { totalPages: number 
                         return (
                             <PaginationNumber
                                 key={page}
-                                href={createPageURL(page)}
+                                href={generateURL(page)}
                                 page={page}
                                 position={position}
                                 isActive={currentPage === page}
@@ -46,10 +48,9 @@ export default function InvoicesPagination({ totalPages }: { totalPages: number 
                         );
                     })}
                 </div>
-
                 <PaginationArrow
                     direction="right"
-                    href={createPageURL(currentPage + 1)}
+                    href={generateURL(currentPage + 1)}
                     isDisabled={currentPage >= totalPages}
                 />
             </div>
