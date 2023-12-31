@@ -22,3 +22,12 @@ export async function updateInvoice({ customer_id, amount, status, id }: TUpdate
     revalidateLink && revalidatePath(revalidateLink)
     redirectLink && redirect(redirectLink)
 }
+
+export async function deleteInvoice(id:string, revalidateLink?: string, redirectLink?: string) {
+    await sql`
+        delete from invoices
+        where id = ${id}
+    `
+    revalidateLink && revalidatePath(revalidateLink)
+    redirectLink && redirect(redirectLink)
+}
