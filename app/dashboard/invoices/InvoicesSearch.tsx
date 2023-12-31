@@ -11,22 +11,25 @@ interface IProps {
 export default function InvoicesSearch({ className = '' }: IProps) {
   const pathname = usePathname();
   const { replace } = useRouter()
+
   const searchParams = useSearchParams();
   const query = searchParams.get('query') || '';
 
-  const handleChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSearch = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const newParams = new URLSearchParams();
+    const newSearchParams = new URLSearchParams();
     if (value) {
-      newParams.set('query', value)
+      newSearchParams.set('query', value)
     } else {
-      newParams.delete('query')
+      newSearchParams.delete('query')
     }
-    const newURL = `${pathname}?${newParams.toString()}`
+    const newURL = `${pathname}?${newSearchParams.toString()}`
     replace(newURL)
   }, 300)
 
   return (
-    <FormControlInput label='Search invoices...' icon={<MagnifyingGlassIcon />} className={className} defaultValue={query} onChange={handleChange} />
+    <>
+      <FormControlInput label='Search invoices...' icon={<MagnifyingGlassIcon />} className={className} defaultValue={query} onChange={handleChangeSearch} />
+    </>
   );
 }

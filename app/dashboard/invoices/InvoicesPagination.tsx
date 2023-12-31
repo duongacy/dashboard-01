@@ -4,20 +4,20 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
 
 export default function InvoicesPagination({ totalPages }: { totalPages: number }) {
     const pathname = usePathname();
-
     const searchParams = useSearchParams();
     const currentPage = Number(searchParams.get('page') || 1)
+    const allPages = generatePagination(currentPage, totalPages);
 
-    const allPages = generatePagination(currentPage, totalPages)
-    const createURL = (page: string | number) => {
+    const createURL = useCallback((page: string | number) => {
         const newSearchParams = new URLSearchParams();
-        newSearchParams.set('page', page.toString());
+        newSearchParams.set('page', page.toString())
         const newURL = `${pathname}?${newSearchParams.toString()}`
         return newURL;
-    }
+    }, [pathname])
 
     if (totalPages < 1) {
         return null

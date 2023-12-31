@@ -6,7 +6,7 @@ export const invoiceSchema = z.object({
     customer_id: z.string().min(4, {
         message: "Please enter a valid value"
     }),
-    amount: z.coerce.number().min(1, {
+    amount: z.coerce.number().gt(0, {
         message: "Please enter a valid value"
     }),
     date: z.string(),

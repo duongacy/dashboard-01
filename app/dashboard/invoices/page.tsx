@@ -6,16 +6,12 @@ import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import InvoicesTable from './InvoicesTable';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
+import { NextPage } from 'next';
 
-export default async function Page({ searchParams }: {
-    searchParams: {
-        query?: string;
-        page?: string;
-    }
-}) {
-    const query = searchParams.query || '';
-    const currentPage = Number(searchParams.page || 1)
-    const totalPage = await fetchInvoicesPages(query);
+const Page: NextPage<{ searchParams: { page?: string, query?: string } }> = async ({ searchParams: {
+    page = '1', query = ''
+} }) => {
+    const totalPages = await fetchInvoicesPages(query);
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -27,13 +23,15 @@ export default async function Page({ searchParams }: {
                 <CreateInvoice />
             </div>
             <div className='flex-grow'>
-                <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-                    <InvoicesTable query={query} currentPage={currentPage} />
+                <Suspense key={query + page} fallback={<InvoicesTableSkeleton />}>
+                    <InvoicesTable query={query} currentPage={Number(page)} />
                 </Suspense>
             </div>
             <div className="mt-5 flex w-full justify-center">
-                <InvoicesPagination totalPages={totalPage} />
+                <InvoicesPagination totalPages={totalPages} />
             </div>
         </div>
     );
 }
+
+export default Page
