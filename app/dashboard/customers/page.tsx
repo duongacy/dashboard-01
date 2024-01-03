@@ -3,7 +3,7 @@ import { lusitana } from '@/app/ui/fonts';
 import CustomersPagination from './CustomersPagination';
 import CustomersTable from './CustomersTable';
 import CustomersSearch from './CustomersSearch';
-import { fetchCustomersPages } from '@/app/lib/data';
+import { fetchCustomersPages } from '@/app/lib/query/customer';
 
 export default async function page({ searchParams }: {
     searchParams: {

@@ -1,9 +1,10 @@
-'use client'
+import { fetchFilteredCustomers } from '@/app/lib/query/customer';
 import { TCustomerTableRow } from '@/app/lib/schemas/customer';
 import Image from 'next/image';
 
-export default function CustomersTable({ query, currentPage }: { query: string, currentPage: number }) {
-    const customers: TCustomerTableRow[] = []
+export default async function CustomersTable({ query, currentPage }: { query: string, currentPage: number }) {
+    const customers: TCustomerTableRow[] = await fetchFilteredCustomers(query, currentPage)
+
     return (
         <div className="mt-6 flow-root">
             <div className="overflow-x-auto">

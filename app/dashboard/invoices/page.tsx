@@ -1,12 +1,12 @@
 import { lusitana } from '@/app/ui/fonts';
 import InvoicesSearch from './InvoicesSearch';
 import InvoicesPagination from './InvoicesPagination';
-import { fetchInvoicesPages } from '@/app/lib/data';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import InvoicesTable from './InvoicesTable';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { NextPage } from 'next';
+import { fetchInvoicesPages } from '@/app/lib/query/invoice';
 
 const Page: NextPage<{ searchParams: { page?: string, query?: string } }> = async ({ searchParams: {
     page = '1', query = ''

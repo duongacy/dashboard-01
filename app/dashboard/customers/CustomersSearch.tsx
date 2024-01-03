@@ -3,12 +3,13 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function CustomersSearch() {
     const searchParams = useSearchParams();
     const pathname = usePathname()
     const { replace } = useRouter()
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
         const newSearchParams = new URLSearchParams();
         if (value) {
@@ -19,7 +20,7 @@ export default function CustomersSearch() {
         }
         const newURL = `${pathname}?${newSearchParams.toString()}`;
         replace(newURL);
-    }
+    }, 300)
     return (
         <div className="relative flex flex-1 flex-shrink-0">
             <label htmlFor="search" className="sr-only">

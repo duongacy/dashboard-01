@@ -1,4 +1,5 @@
-import { fetchCustomersCount, fetchInvoicesCount, fetchPaidInvoicesCount, fetchPendingInvoicesCount } from '@/app/lib/data';
+import { fetchCustomersCount } from '@/app/lib/query/customer';
+import { fetchInvoicesCount, fetchPaidInvoicesCount, fetchPendingInvoicesCount } from '@/app/lib/query/invoice';
 import { formatCurrency } from '@/app/lib/utils';
 import { lusitana } from '@/app/ui/fonts';
 import {

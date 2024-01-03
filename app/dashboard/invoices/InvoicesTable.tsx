@@ -1,10 +1,10 @@
-import { fetchFilteredInvoices } from '@/app/lib/data';
 import { formatCurrency, formatDateToLocal } from '@/app/lib/utils';
 import { LinkButton } from '@/app/ui/common/Button';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { PencilIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { InvoiceDelete } from './InvoiceDelete';
+import { fetchFilteredInvoices } from '@/app/lib/query/invoice';
 
 export default async function InvoicesTable({
     query,
