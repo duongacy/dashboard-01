@@ -6,30 +6,39 @@ import { ChangeEvent } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 interface IProps {
-  className?: string
+  className?: string;
 }
 export default function InvoicesSearch({ className = '' }: IProps) {
   const pathname = usePathname();
-  const { replace } = useRouter()
+  const { replace } = useRouter();
 
   const searchParams = useSearchParams();
   const query = searchParams.get('query') || '';
 
-  const handleChangeSearch = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const newSearchParams = new URLSearchParams();
-    if (value) {
-      newSearchParams.set('query', value)
-    } else {
-      newSearchParams.delete('query')
-    }
-    const newURL = `${pathname}?${newSearchParams.toString()}`
-    replace(newURL)
-  }, 300)
+  const handleChangeSearch = useDebouncedCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      const newSearchParams = new URLSearchParams();
+      if (value) {
+        newSearchParams.set('query', value);
+      } else {
+        newSearchParams.delete('query');
+      }
+      const newURL = `${pathname}?${newSearchParams.toString()}`;
+      replace(newURL);
+    },
+    300,
+  );
 
   return (
     <>
-      <FormControlInput label='Search invoices...' icon={<MagnifyingGlassIcon />} className={className} defaultValue={query} onChange={handleChangeSearch} />
+      <FormControlInput
+        label="Search invoices..."
+        icon={<MagnifyingGlassIcon />}
+        className={className}
+        defaultValue={query}
+        onChange={handleChangeSearch}
+      />
     </>
   );
 }

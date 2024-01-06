@@ -1,5 +1,9 @@
 import { fetchCustomersCount } from '@/app/lib/query/customer';
-import { fetchInvoicesCount, fetchPaidInvoicesCount, fetchPendingInvoicesCount } from '@/app/lib/query/invoice';
+import {
+  fetchInvoicesCount,
+  fetchPaidInvoicesCount,
+  fetchPendingInvoicesCount,
+} from '@/app/lib/query/invoice';
 import { formatCurrency } from '@/app/lib/utils';
 import { lusitana } from '@/app/ui/fonts';
 import {
@@ -47,7 +51,7 @@ export function Card({
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
       <div className="flex p-4">
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
+        <p className="ml-2 text-sm font-medium">{title}</p>
       </div>
       <p
         className={`${lusitana.className}
@@ -59,23 +63,24 @@ export function Card({
   );
 }
 
-
 export async function PaidInvoicesCard() {
-  const sum = await fetchPaidInvoicesCount()
-  return (<Card title="Collected" value={formatCurrency(sum)} type="collected" />);
+  const sum = await fetchPaidInvoicesCount();
+  return (
+    <Card title="Collected" value={formatCurrency(sum)} type="collected" />
+  );
 }
 
 export async function PendingInvoicesCard() {
-  const sum = await fetchPendingInvoicesCount()
-  return (<Card title="Collected" value={formatCurrency(sum)} type="pending" />);
+  const sum = await fetchPendingInvoicesCount();
+  return <Card title="Collected" value={formatCurrency(sum)} type="pending" />;
 }
 
 export async function TotalInvoicesCard() {
-  const sum = await fetchInvoicesCount()
-  return (<Card title="Collected" value={sum} type="collected" />);
+  const sum = await fetchInvoicesCount();
+  return <Card title="Collected" value={sum} type="collected" />;
 }
 
 export async function TotalCustomerCard() {
-  const sum = await fetchCustomersCount()
-  return (<Card title="Collected" value={sum} type="customers" />);
+  const sum = await fetchCustomersCount();
+  return <Card title="Collected" value={sum} type="customers" />;
 }

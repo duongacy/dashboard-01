@@ -1,20 +1,44 @@
-import { PencilIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { ReactNode } from "react";
+import Link from 'next/link';
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-interface IProps {
-    href: string;
-    icon?: ReactNode;
+interface TableActionButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  icon: ReactNode;
+  href?: string;
 }
-export function LinkButton({ href, icon }: IProps) {
+
+export function TableActionButton({
+  className,
+  icon,
+  children,
+  href,
+  ...props
+}: TableActionButtonProps) {
+  if (!href)
     return (
-        <Link
-            href={href}
-            className="rounded-md border p-2 hover:bg-gray-100"
-        >
-            {icon && <div className="w-5">
-                {icon}
-            </div>}
-        </Link>
+      <button
+        className={twMerge(
+          'rounded-md border p-2 hover:bg-gray-100',
+          className,
+        )}
+        type="submit"
+        {...props}
+      >
+        <span className="sr-only">{children}</span>
+        <div className="w-5">{icon}</div>
+      </button>
     );
+
+  return (
+    <Link
+      href={href}
+      className={twMerge('rounded-md border p-2 hover:bg-gray-100', className)}
+    >
+      {icon && <div className="w-5">{icon}</div>}
+    </Link>
+  );
 }

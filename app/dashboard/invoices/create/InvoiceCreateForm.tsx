@@ -1,10 +1,10 @@
-'use client'
+'use client';
 import { TCustomerSelectOption } from '@/app/lib/schemas/customer';
 import { TCreateInvoice, createInvoiceSchema } from '@/app/lib/schemas/invoice';
 import { createInvoice } from '@/app/lib/server-actions/invoice';
 import { Button } from '@/app/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
   CheckIcon,
@@ -18,24 +18,32 @@ const defaultValues: TCreateInvoice = {
   status: 'paid',
   customer_id: '',
   amount: 0,
-  date: new Date().toISOString().split('T')[0]
-}
+  date: new Date().toISOString().split('T')[0],
+};
 
-export default function InvoiceCreateForm({ customers }: { customers: TCustomerSelectOption[] }) {
-  const { register, handleSubmit, formState: { errors } } = useForm<TCreateInvoice>({
+export default function InvoiceCreateForm({
+  customers,
+}: {
+  customers: TCustomerSelectOption[];
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TCreateInvoice>({
     defaultValues,
-    resolver: zodResolver(createInvoiceSchema)
+    resolver: zodResolver(createInvoiceSchema),
   });
 
   const handleValid: SubmitHandler<TCreateInvoice> = (data) => {
     createInvoice(data, '/dashboard/invoices', '/dashboard/invoices');
-  }
+  };
   const handleError: SubmitErrorHandler<TCreateInvoice> = (error) => {
     console.log(error);
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit(handleValid, handleError)} >
+    <form onSubmit={handleSubmit(handleValid, handleError)}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
@@ -58,7 +66,9 @@ export default function InvoiceCreateForm({ customers }: { customers: TCustomerS
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
-          {errors.customer_id && <small className='text-red-600'>{errors.customer_id.message}</small>}
+          {errors.customer_id && (
+            <small className="text-red-600">{errors.customer_id.message}</small>
+          )}
         </div>
 
         <div className="mb-4">
@@ -78,7 +88,9 @@ export default function InvoiceCreateForm({ customers }: { customers: TCustomerS
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
-          {errors.amount && <small className='text-red-600'>{errors.amount.message}</small>}
+          {errors.amount && (
+            <small className="text-red-600">{errors.amount.message}</small>
+          )}
         </div>
 
         {/* Invoice Status */}

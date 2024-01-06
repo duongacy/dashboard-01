@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { signInWithFormData } from '@/app/lib/server-actions/auth';
 import { lusitana } from '@/app/ui/fonts';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';

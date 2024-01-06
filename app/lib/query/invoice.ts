@@ -5,35 +5,35 @@ import { formatCurrency } from '../utils';
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchPaidInvoicesCount() {
-    noStore()
-    const data = await sql`SELECT
+  noStore();
+  const data = await sql`SELECT
            SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid"
            FROM invoices`;
-    return data.rows[0].paid
+  return data.rows[0].paid;
 }
 
 export async function fetchPendingInvoicesCount() {
-    noStore()
-    const data = await sql`SELECT
+  noStore();
+  const data = await sql`SELECT
            SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
            FROM invoices`;
-    return data.rows[0].pending
+  return data.rows[0].pending;
 }
 
 export async function fetchInvoicesCount() {
-    noStore()
-    const data = await sql`SELECT COUNT(*) FROM invoices`;
-    return Number(data.rows[0].count || 0)
+  noStore();
+  const data = await sql`SELECT COUNT(*) FROM invoices`;
+  return Number(data.rows[0].count || 0);
 }
 
 export async function fetchFilteredInvoices(
-    query: string,
-    currentPage: number,
+  query: string,
+  currentPage: number,
 ) {
-    noStore()
-    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-    try {
-        const invoices = await sql<TInvoiceTableRow>`
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  try {
+    const invoices = await sql<TInvoiceTableRow>`
         SELECT
           invoices.id,
           invoices.amount,
@@ -54,17 +54,17 @@ export async function fetchFilteredInvoices(
         LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
 
-        return invoices.rows;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch invoices.');
-    }
+    return invoices.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
 }
 
 export async function fetchInvoicesPages(query: string) {
-    noStore()
-    try {
-        const count = await sql`SELECT COUNT(*)
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       WHERE
@@ -75,18 +75,18 @@ export async function fetchInvoicesPages(query: string) {
         invoices.status ILIKE ${`%${query}%`}
     `;
 
-        const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
-        return totalPages;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch total number of invoices.');
-    }
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
+  }
 }
 
 export async function fetchInvoiceById(id: string) {
-    noStore()
-    try {
-        const data = await sql<TInvoice>`
+  noStore();
+  try {
+    const data = await sql<TInvoice>`
         SELECT
           invoices.id,
           invoices.customer_id,
@@ -96,30 +96,30 @@ export async function fetchInvoiceById(id: string) {
         FROM invoices
         WHERE invoices.id = ${id};
       `;
-        return data.rows[0];
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch invoice.');
-    }
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoice.');
+  }
 }
 
 export async function fetchLatestInvoices() {
-    noStore()
-    try {
-        const data = await sql<TLatestInvoice>`
+  noStore();
+  try {
+    const data = await sql<TLatestInvoice>`
         SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
         FROM invoices
         JOIN customers ON invoices.customer_id = customers.id
         ORDER BY invoices.date DESC
         LIMIT 5`;
 
-        const latestInvoices = data.rows.map((invoice) => ({
-            ...invoice,
-            amount: formatCurrency(invoice.amount),
-        }));
-        return latestInvoices;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch the latest invoices.');
-    }
+    const latestInvoices = data.rows.map((invoice) => ({
+      ...invoice,
+      amount: formatCurrency(invoice.amount),
+    }));
+    return latestInvoices;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the latest invoices.');
+  }
 }

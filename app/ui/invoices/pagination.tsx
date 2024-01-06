@@ -8,15 +8,15 @@ import { usePathname, useSearchParams } from 'next/navigation';
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: comment in this code when you get to this point in the course
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page') || 1)
-  const pathname = usePathname()
+  const currentPage = Number(searchParams.get('page') || 1);
+  const pathname = usePathname();
 
   const allPages = generatePagination(currentPage, totalPages);
   const createPageURL = (p: number | string) => {
     const url = new URLSearchParams(searchParams);
     url.set('page', p.toString());
     return `${pathname}?${url.toString()}`;
-  }
+  };
 
   return (
     <>
