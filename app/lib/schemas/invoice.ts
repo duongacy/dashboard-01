@@ -1,16 +1,16 @@
-import { z } from 'zod';
-import { customerSchema } from './customer';
+import { z } from "zod";
+import { customerSchema } from "./customer";
 
 export const invoiceSchema = z.object({
   id: z.string(),
   customer_id: z.string().min(4, {
-    message: 'Please enter a valid value',
+    message: "Please enter a valid value",
   }),
   amount: z.coerce.number().gt(0, {
-    message: 'Please enter a valid value',
+    message: "Please enter a valid value",
   }),
   date: z.string(),
-  status: z.enum(['pending', 'paid']),
+  status: z.enum(["pending", "paid"]),
 });
 export const createInvoiceSchema = invoiceSchema.omit({
   id: true,

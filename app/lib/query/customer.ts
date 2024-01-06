@@ -1,6 +1,6 @@
-import { sql } from '@vercel/postgres';
-import { TCustomerSelectOption, TCustomerTableRow } from '../schemas/customer';
-import { unstable_noStore } from 'next/cache';
+import { sql } from "@vercel/postgres";
+import { TCustomerSelectOption, TCustomerTableRow } from "../schemas/customer";
+import { unstable_noStore } from "next/cache";
 const ITEMS_PER_PAGE = 6;
 
 export async function fetchCustomers() {
@@ -16,8 +16,8 @@ export async function fetchCustomers() {
     const customers = data.rows;
     return customers;
   } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch all customers.');
+    console.error("Database Error:", err);
+    throw new Error("Failed to fetch all customers.");
   }
 }
 
@@ -38,8 +38,8 @@ export async function fetchFilteredCustomers(
 
     return invoices.rows;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch customers.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch customers.");
   }
 }
 
@@ -52,8 +52,8 @@ export async function fetchCustomersPages(query: string) {
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch total number of invoices.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of invoices.");
   }
 }
 

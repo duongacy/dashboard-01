@@ -1,6 +1,6 @@
-import { fetchFilteredCustomers } from '@/app/lib/query/customer';
-import { TCustomerTableRow } from '@/app/lib/schemas/customer';
-import Image from 'next/image';
+import { fetchFilteredCustomers } from "@/app/lib/query/customer";
+import { TCustomerTableRow } from "@/app/lib/schemas/customer";
+import Image from "next/image";
 
 export default async function CustomersTable({
   query,

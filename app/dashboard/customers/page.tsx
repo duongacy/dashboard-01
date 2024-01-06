@@ -1,8 +1,8 @@
-import { lusitana } from '@/app/ui/fonts';
-import CustomersPagination from './CustomersPagination';
-import CustomersTable from './CustomersTable';
-import CustomersSearch from './CustomersSearch';
-import { fetchCustomersPages } from '@/app/lib/query/customer';
+import { lusitana } from "@/app/ui/fonts";
+import CustomersPagination from "./CustomersPagination";
+import CustomersTable from "./CustomersTable";
+import CustomersSearch from "./CustomersSearch";
+import { fetchCustomersPages } from "@/app/lib/query/customer";
 
 export default async function page({
   searchParams,
@@ -13,7 +13,7 @@ export default async function page({
   };
 }) {
   const totalPages = (await fetchCustomersPages(
-    searchParams.query || '',
+    searchParams.query || "",
   )) as number;
 
   return (
@@ -27,7 +27,7 @@ export default async function page({
       </div>
       <div className="flex-grow">
         <CustomersTable
-          query={searchParams.query || ''}
+          query={searchParams.query || ""}
           currentPage={Number(searchParams.page || 1)}
         />
       </div>

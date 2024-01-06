@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import React, { ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+import clsx from "clsx";
+import React, { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -8,12 +8,12 @@ interface IProps
     HTMLInputElement
   > {
   label?: string;
-  direction?: 'row' | 'column';
+  direction?: "row" | "column";
   icon?: ReactNode;
 }
 export default function FormControlInput({
   className,
-  direction = 'row',
+  direction = "row",
   icon,
   label,
   ...props
@@ -21,8 +21,8 @@ export default function FormControlInput({
   return (
     <div
       className={twMerge(
-        clsx('flex gap-x-10 gap-y-2', {
-          'flex-col': direction === 'column',
+        clsx("flex gap-x-10 gap-y-2", {
+          "flex-col": direction === "column",
         }),
         className,
       )}
@@ -35,7 +35,7 @@ export default function FormControlInput({
       <div className="relative flex flex-grow">
         <input
           className={
-            'peer block flex-grow rounded-md border border-gray-200 py-[9px] pl-8 pr-3 text-sm outline-2 placeholder:text-gray-500'
+            "peer block flex-grow rounded-md border border-gray-200 py-[9px] pl-8 pr-3 text-sm outline-2 placeholder:text-gray-500"
           }
           {...props}
         />

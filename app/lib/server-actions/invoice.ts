@@ -1,12 +1,12 @@
-'use server';
-import { sql } from '@vercel/postgres';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+"use server";
+import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   TCreateInvoice,
   TUpdateInvoice,
   updateInvoiceSchema,
-} from '../schemas/invoice';
+} from "../schemas/invoice";
 
 export async function createInvoice(
   { customer_id, amount, date, status }: TCreateInvoice,
@@ -20,12 +20,12 @@ export async function createInvoice(
         `;
     revalidateLink && revalidatePath(revalidateLink);
     return {
-      message: 'Created Invoice.',
+      message: "Created Invoice.",
     };
     // redirectLink && redirect(redirectLink)
   } catch (error) {
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: "Database Error: Failed to Create Invoice.",
     };
   }
 }
@@ -43,12 +43,12 @@ export async function updateInvoice(
         `;
     revalidateLink && revalidatePath(revalidateLink);
     return {
-      message: 'Updated Invoice.',
+      message: "Updated Invoice.",
     };
     // redirectLink && redirect(redirectLink)
   } catch (error) {
     return {
-      message: 'Database Error: Failed to Update Invoice.',
+      message: "Database Error: Failed to Update Invoice.",
     };
   }
 }
@@ -65,12 +65,12 @@ export async function deleteInvoice(
         `;
     revalidateLink && revalidatePath(revalidateLink);
     return {
-      message: 'Deleted Invoice.',
+      message: "Deleted Invoice.",
     };
     // redirectLink && redirect(redirectLink)
   } catch (error) {
     return {
-      message: 'Database Error: Failed to Delete Invoice.',
+      message: "Database Error: Failed to Delete Invoice.",
     };
   }
 }

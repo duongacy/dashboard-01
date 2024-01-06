@@ -1,9 +1,9 @@
-import { fetchFilteredInvoices } from '@/app/lib/query/invoice';
-import { formatCurrency, formatDateToLocal } from '@/app/lib/utils';
-import InvoiceStatus from '@/app/ui/invoices/status';
-import Image from 'next/image';
-import { InvoiceDelete } from './InvoiceDelete';
-import { InvoiceEdit } from './InvoiceEdit';
+import { fetchFilteredInvoices } from "@/app/lib/query/invoice";
+import { formatCurrency, formatDateToLocal } from "@/app/lib/utils";
+import InvoiceStatus from "@/app/ui/invoices/status";
+import Image from "next/image";
+import { InvoiceDelete } from "./InvoiceDelete";
+import { InvoiceEdit } from "./InvoiceEdit";
 
 export default async function InvoicesTable({
   query,

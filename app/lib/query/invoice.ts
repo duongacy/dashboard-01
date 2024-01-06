@@ -1,7 +1,7 @@
-import { sql } from '@vercel/postgres';
-import { unstable_noStore as noStore } from 'next/cache';
-import { TInvoice, TInvoiceTableRow, TLatestInvoice } from '../schemas/invoice';
-import { formatCurrency } from '../utils';
+import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
+import { TInvoice, TInvoiceTableRow, TLatestInvoice } from "../schemas/invoice";
+import { formatCurrency } from "../utils";
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchPaidInvoicesCount() {
@@ -56,8 +56,8 @@ export async function fetchFilteredInvoices(
 
     return invoices.rows;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch invoices.");
   }
 }
 
@@ -78,8 +78,8 @@ export async function fetchInvoicesPages(query: string) {
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch total number of invoices.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of invoices.");
   }
 }
 
@@ -98,8 +98,8 @@ export async function fetchInvoiceById(id: string) {
       `;
     return data.rows[0];
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoice.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch invoice.");
   }
 }
 
@@ -119,7 +119,7 @@ export async function fetchLatestInvoices() {
     }));
     return latestInvoices;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest invoices.');
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch the latest invoices.");
   }
 }
