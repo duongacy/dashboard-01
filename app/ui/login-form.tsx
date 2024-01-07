@@ -93,7 +93,7 @@ export default function SigninForm() {
         </div>
         <SigninButton />
         <div
-          className="flex items-end space-x-1 mt-3"
+          className="mt-3 flex items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
