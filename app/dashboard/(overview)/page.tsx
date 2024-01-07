@@ -1,18 +1,14 @@
-import {
-  PaidInvoicesCard,
-  PendingInvoicesCard,
-  TotalCustomerCard,
-  TotalInvoicesCard,
-} from "@/app/ui/dashboard/cards";
-import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
-import RevenueChart from "@/app/ui/dashboard/revenue-chart";
 import { lusitana } from "@/app/ui/fonts";
-import {
-  CardSkeleton,
-  LatestInvoicesSkeleton,
-  RevenueChartSkeleton,
-} from "@/app/ui/skeletons";
 import { Suspense } from "react";
+import { PaidInvoicesCard } from "./components/PaidInvoicesCard";
+import { PendingInvoicesCard } from "./components/PendingInvoicesCard";
+import { TotalCustomerCard } from "./components/TotalCustomerCard";
+import { TotalInvoicesCard } from "./components/TotalInvoicesCard";
+import { LatestInvoices } from "./components/LatestInvoices";
+import { RevenueChart } from "./components/RevenueChart";
+import { DashboardCardSkeleton } from "@/app/ui/common/DashboardCardSkeleton";
+import { RevenueChartSkeleton } from "./components/RevenueChartSkeleton";
+import { LatestInvoicesSkeleton } from "./components/LatestInvoicesSkeleton";
 
 export default async function page() {
   return (
@@ -21,16 +17,16 @@ export default async function page() {
         Dashboard
       </h2>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <Suspense fallback={<CardSkeleton />}>
+        <Suspense fallback={<DashboardCardSkeleton/>}>
           <PaidInvoicesCard />
         </Suspense>
-        <Suspense fallback={<CardSkeleton />}>
+        <Suspense fallback={<DashboardCardSkeleton />}>
           <PendingInvoicesCard />
         </Suspense>
-        <Suspense fallback={<CardSkeleton />}>
+        <Suspense fallback={<DashboardCardSkeleton />}>
           <TotalInvoicesCard />
         </Suspense>
-        <Suspense fallback={<CardSkeleton />}>
+        <Suspense fallback={<DashboardCardSkeleton />}>
           <TotalCustomerCard />
         </Suspense>
       </div>

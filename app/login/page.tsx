@@ -1,6 +1,6 @@
 import AcmeLogo from "@/app/ui/acme-logo";
-import LoginForm from "@/app/ui/login-form";
 import { QueryProvider } from "../providers/QueryProvider";
+import { SigninForm } from "./components/SigninForm";
 
 export default function LoginPage() {
   return (
@@ -12,7 +12,7 @@ export default function LoginPage() {
           </div>
         </div>
         <QueryProvider>
-          <LoginForm />
+          <SigninForm />
         </QueryProvider>
       </div>
     </main>

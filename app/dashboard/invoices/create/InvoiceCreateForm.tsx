@@ -2,7 +2,6 @@
 import { TCustomerSelectOption } from "@/app/lib/schemas/customer";
 import { TCreateInvoice, createInvoiceSchema } from "@/app/lib/schemas/invoice";
 import { createInvoice } from "@/app/lib/server-actions/invoice";
-import { Button } from "@/app/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 
@@ -13,6 +12,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { Button } from "@/app/ui/common/Button";
 
 const defaultValues: TCreateInvoice = {
   status: "paid",

@@ -7,7 +7,7 @@ import {
   updateInvoiceSchema,
 } from "@/app/lib/schemas/invoice";
 import { updateInvoice } from "@/app/lib/server-actions/invoice";
-import { Button } from "@/app/ui/button";
+import { Button } from "@/app/ui/common/Button";
 import {
   CheckIcon,
   ClockIcon,

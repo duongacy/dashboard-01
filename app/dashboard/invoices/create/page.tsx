@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
+import Breadcrumbs from "@/app/ui/common/Breadcrumbs";
 import InvoiceCreateForm from "./InvoiceCreateForm";
 import { fetchCustomers } from "@/app/lib/query/customer";
 

@@ -1,8 +1,8 @@
 import { lusitana } from "@/app/ui/fonts";
-import CustomersPagination from "./CustomersPagination";
-import CustomersTable from "./CustomersTable";
-import CustomersSearch from "./CustomersSearch";
+import CustomersTable from "./components/CustomersTable";
 import { fetchCustomersPages } from "@/app/lib/query/customer";
+import { Search } from "@/app/ui/common/Search";
+import Pagination from "@/app/ui/common/Pagination";
 
 export default async function page({
   searchParams,
@@ -22,7 +22,7 @@ export default async function page({
         <h1 className={`${lusitana.className} text-2xl`}>Customers</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <CustomersSearch />
+        <Search placeholder="" />
         {/* Create button here */}
       </div>
       <div className="flex-grow">
@@ -33,7 +33,7 @@ export default async function page({
       </div>
       <div className="mt-5 flex w-full justify-center">
         {/* Pagination here */}
-        <CustomersPagination totalPages={totalPages} />
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );

@@ -1,12 +1,7 @@
-"use server";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import {
-  TCreateInvoice,
-  TUpdateInvoice,
-  updateInvoiceSchema,
-} from "../schemas/invoice";
+import { TCreateInvoice, TUpdateInvoice } from "../schemas/invoice";
+import { fetchPaidInvoicesCount } from "../query/invoice";
 
 export async function createInvoice(
   { customer_id, amount, date, status }: TCreateInvoice,
@@ -73,4 +68,8 @@ export async function deleteInvoice(
       message: "Database Error: Failed to Delete Invoice.",
     };
   }
+}
+
+export async function fetchPageInvoiceCountClient() {
+  return await fetchPaidInvoicesCount();
 }

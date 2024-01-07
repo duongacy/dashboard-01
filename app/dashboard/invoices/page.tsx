@@ -1,12 +1,12 @@
 import { lusitana } from "@/app/ui/fonts";
-import InvoicesSearch from "./InvoicesSearch";
-import InvoicesPagination from "./InvoicesPagination";
 import { Suspense } from "react";
-import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
-import InvoicesTable from "./InvoicesTable";
-import { CreateInvoice } from "@/app/ui/invoices/buttons";
 import { NextPage } from "next";
 import { fetchInvoicesPages } from "@/app/lib/query/invoice";
+import InvoicesTable from "./components/InvoicesTable";
+import { InvoicesTableSkeleton } from "./components/InvoicesTableSkeleton";
+import { Search } from "@/app/ui/common/Search";
+import Pagination from "@/app/ui/common/Pagination";
+import { CreateButton } from "@/app/ui/common/Button";
 
 const Page: NextPage<{
   searchParams: { page?: string; query?: string };
@@ -19,8 +19,8 @@ const Page: NextPage<{
         <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <InvoicesSearch className="flex-grow" />
-        <CreateInvoice />
+        <Search placeholder="" />
+        <CreateButton href="/dashboard/invoices/create">Create</CreateButton>
       </div>
       <div className="flex-grow">
         <Suspense key={query + page} fallback={<InvoicesTableSkeleton />}>
@@ -28,7 +28,7 @@ const Page: NextPage<{
         </Suspense>
       </div>
       <div className="mt-5 flex w-full justify-center">
-        <InvoicesPagination totalPages={totalPages} />
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
