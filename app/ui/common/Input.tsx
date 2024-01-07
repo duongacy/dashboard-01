@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useId } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IProps
@@ -18,6 +18,7 @@ export default function FormControlInput({
   label,
   ...props
 }: IProps) {
+  const id = useId();
   return (
     <div
       className={twMerge(
@@ -28,12 +29,13 @@ export default function FormControlInput({
       )}
     >
       {label && (
-        <label htmlFor="search" className="sr-only">
+        <label htmlFor={id} className="sr-only">
           {label}
         </label>
       )}
       <div className="relative flex flex-grow">
         <input
+          id={id}
           className={
             "peer block flex-grow rounded-md border border-gray-200 py-[9px] pl-8 pr-3 text-sm outline-2 placeholder:text-gray-500"
           }
